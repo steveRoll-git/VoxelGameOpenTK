@@ -1,10 +1,11 @@
 #version 330 core
 
 in vec2 frag_texCoords;
+in vec3 modelCoords;
 
 out vec4 out_color;
 
 void main()
 {
-    out_color = vec4(frag_texCoords.x, frag_texCoords.y, 0, 1.0);
+    out_color = vec4(abs(modelCoords), 1.0);
 }

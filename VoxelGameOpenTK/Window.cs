@@ -29,6 +29,7 @@ internal class Window(GameWindowSettings gameWindowSettings, NativeWindowSetting
         base.OnLoad();
 
         GL.Enable(EnableCap.DepthTest);
+        GL.Enable(EnableCap.CullFace);
 
         var vertexFormat = new VertexFormat(
             new(VertexAttribute.Position, 3),
@@ -36,19 +37,27 @@ internal class Window(GameWindowSettings gameWindowSettings, NativeWindowSetting
         );
 
         cubeMesh = new Mesh(vertexFormat, new float[,] {
-            { 0.5f, 0.5f, -0.5f, 0, 0 },
-            { 0.5f, -0.5f, -0.5f, 0, 1 },
+            {  0.5f,  0.5f, -0.5f, 0, 0 },
+            {  0.5f, -0.5f, -0.5f, 0, 1 },
             { -0.5f, -0.5f, -0.5f, 1, 1 },
-            { -0.5f, 0.5f, -0.5f, 1, 0 },
-            { 0.5f, 0.5f, 0.5f, 0, 0 },
-            { 0.5f, -0.5f, 0.5f, 0, 1 },
-            { -0.5f, -0.5f, 0.5f, 1, 1 },
-            { -0.5f, 0.5f, 0.5f, 1, 0 },
+            { -0.5f,  0.5f, -0.5f, 1, 0 },
+            {  0.5f,  0.5f,  0.5f, 0, 0 },
+            {  0.5f, -0.5f,  0.5f, 0, 1 },
+            { -0.5f, -0.5f,  0.5f, 1, 1 },
+            { -0.5f,  0.5f,  0.5f, 1, 0 },
         }, [
             0, 1, 3,
             1, 2, 3,
-            4, 5, 7,
-            5, 6, 7,
+            5, 4, 7,
+            6, 5, 7,
+            1, 0, 4,
+            5, 1, 4,
+            6, 7, 3,
+            2, 6, 3,
+            4, 0, 3,
+            7, 4, 3,
+            1, 5, 6,
+            2, 1, 6,
         ]);
 
         camera = new Camera
