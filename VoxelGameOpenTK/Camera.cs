@@ -9,7 +9,7 @@ internal class Camera
 
     public Matrix4x4 GetView()
     {
-        Matrix4x4.Invert(Matrix4x4.CreateRotationY(RotationY) * Matrix4x4.CreateRotationX(RotationX) * Matrix4x4.CreateTranslation(Position), out var inverse);
+        Matrix4x4.Invert(Matrix4x4.CreateRotationX(RotationX) * Matrix4x4.CreateRotationY(RotationY) * Matrix4x4.CreateTranslation(Position), out var inverse);
         return inverse;
     }
 }
