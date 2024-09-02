@@ -1,6 +1,7 @@
 ﻿using OpenTK.Graphics.OpenGL4;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
+using OpenTK.Windowing.GraphicsLibraryFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,8 @@ internal class Window(GameWindowSettings gameWindowSettings, NativeWindowSetting
     private Camera camera;
 
     private float time = 0;
+
+    private float sensitivity = 0.005f;
 
     protected override void OnLoad()
     {
@@ -58,6 +61,14 @@ internal class Window(GameWindowSettings gameWindowSettings, NativeWindowSetting
         projectionMatrix = Matrix4x4.CreatePerspectiveFieldOfView(MathF.PI / 2 * 0.7f, (float)ClientSize.X / ClientSize.Y, 0.1f, 100);
 
         shader.SendMat4("projection", projectionMatrix);
+        UpdateView();
+
+        CursorState = CursorState.Grabbed;
+        RawMouseInput = true;
+    }
+
+    private void UpdateView()
+    {
         shader.SendMat4("view", camera.GetView());
     }
 
@@ -66,6 +77,17 @@ internal class Window(GameWindowSettings gameWindowSettings, NativeWindowSetting
         base.OnUpdateFrame(args);
 
         time += (float)args.Time;
+
+        var input = KeyboardState;
+
+        if (input.IsKeyDown(Keys.Escape))
+        {
+            Close();
+        }
+
+        var mouse = MouseState;
+        camera.RotationY -= mouse.Delta.X * sensitivity;
+        camera.RotationX -= mouse.Delta.Y * sensitivity;
     }
 
     protected override void OnRenderFrame(FrameEventArgs args)
@@ -73,6 +95,8 @@ internal class Window(GameWindowSettings gameWindowSettings, NativeWindowSetting
         base.OnRenderFrame(args);
 
         GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+
+        UpdateView();
 
         shader.Use();
         cubeMesh.Draw(Matrix4x4.CreateRotationZ(time) * Matrix4x4.CreateRotationY(time / 2));
