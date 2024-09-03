@@ -9,7 +9,10 @@ var nativeWindowSettings = new NativeWindowSettings()
     // This is needed to run on macos
     Flags = ContextFlags.ForwardCompatible,
     Vsync = VSyncMode.On,
+    StartVisible = false,
 };
 
 using var window = new Window(GameWindowSettings.Default, nativeWindowSettings);
+window.CenterWindow();
+window.IsVisible = true;
 window.Run();

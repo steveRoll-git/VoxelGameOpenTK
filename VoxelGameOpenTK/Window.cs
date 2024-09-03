@@ -74,6 +74,8 @@ internal class Window(GameWindowSettings gameWindowSettings, NativeWindowSetting
 
         CursorState = CursorState.Grabbed;
         RawMouseInput = true;
+
+        NewInputFrame();
     }
 
     private void UpdateView()
@@ -109,6 +111,8 @@ internal class Window(GameWindowSettings gameWindowSettings, NativeWindowSetting
 
         shader.Use();
         cubeMesh.Draw(Matrix4x4.CreateRotationZ(time) * Matrix4x4.CreateRotationY(time / 2));
+        cubeMesh.Draw(Matrix4x4.CreateTranslation(1, 0, 0));
+        cubeMesh.Draw(Matrix4x4.CreateTranslation(-1, 0, 0));
 
         SwapBuffers();
     }
