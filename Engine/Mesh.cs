@@ -1,9 +1,9 @@
 ﻿using OpenTK.Graphics.OpenGL4;
 using System.Numerics;
 
-namespace VoxelGameOpenTK;
+namespace Engine;
 
-internal class Mesh
+public class Mesh
 {
     private readonly int vao;
     private readonly int vbo;
@@ -58,7 +58,7 @@ internal class Mesh
     public void Draw(Matrix4x4 transform)
     {
         GL.BindVertexArray(vao);
-        Shader.CurrentShader.SendMat4("transform", transform);
+        Shader.CurrentShader?.SendMat4("transform", transform);
         GL.DrawElements(PrimitiveType.Triangles, vertexCount, DrawElementsType.UnsignedInt, 0);
     }
 }

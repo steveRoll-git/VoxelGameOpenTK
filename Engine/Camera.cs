@@ -1,7 +1,8 @@
 ﻿using System.Numerics;
 
-namespace VoxelGameOpenTK;
-internal class Camera
+namespace Engine;
+
+public class Camera
 {
     public Vector3 Position;
     public float RotationX;

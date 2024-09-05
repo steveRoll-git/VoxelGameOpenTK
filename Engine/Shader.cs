@@ -2,13 +2,13 @@
 using System.Numerics;
 using OpenTK.Graphics.OpenGL4;
 
-namespace VoxelGameOpenTK;
+namespace Engine;
 
-internal class Shader
+public class Shader
 {
     private readonly int programHandle;
 
-    public static Shader CurrentShader { get; private set; }
+    public static Shader? CurrentShader { get; private set; }
 
     public Shader(string vertexCode, string fragmentCode)
     {

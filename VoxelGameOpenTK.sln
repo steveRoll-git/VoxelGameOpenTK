@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35219.272
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoxelGameOpenTK", "VoxelGameOpenTK\VoxelGameOpenTK.csproj", "{B75E0511-A416-46E3-9989-AAC7939548BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VoxelGameOpenTK", "VoxelGameOpenTK\VoxelGameOpenTK.csproj", "{B75E0511-A416-46E3-9989-AAC7939548BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Engine", "Engine\Engine.csproj", "{98CAA7A7-B531-46A1-9444-91FE4B59E43F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{B75E0511-A416-46E3-9989-AAC7939548BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B75E0511-A416-46E3-9989-AAC7939548BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B75E0511-A416-46E3-9989-AAC7939548BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98CAA7A7-B531-46A1-9444-91FE4B59E43F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98CAA7A7-B531-46A1-9444-91FE4B59E43F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98CAA7A7-B531-46A1-9444-91FE4B59E43F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98CAA7A7-B531-46A1-9444-91FE4B59E43F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
