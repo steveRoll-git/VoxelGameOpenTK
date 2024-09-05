@@ -92,6 +92,35 @@ internal class Window(GameWindowSettings gameWindowSettings, NativeWindowSetting
             Close();
         }
 
+        Vector3 movement = new();
+        if (input.IsKeyDown(Keys.W))
+        {
+            movement.Z -= 1;
+        }
+        else if (input.IsKeyDown(Keys.S))
+        {
+            movement.Z += 1;
+        }
+        if (input.IsKeyDown(Keys.D))
+        {
+            movement.X += 1;
+        }
+        else
+        if (input.IsKeyDown(Keys.A))
+        {
+            movement.X -= 1;
+        }
+        movement = Vector3.Transform(movement, Matrix4x4.CreateFromAxisAngle(Vector3.UnitY, camera.RotationY));
+        if (input.IsKeyDown(Keys.Space))
+        {
+            movement.Y += 1;
+        }
+        else if (input.IsKeyDown(Keys.LeftControl))
+        {
+            movement.Y -= 1;
+        }
+        camera.Position += movement * (float)args.Time;
+
         var mouse = MouseState;
         camera.RotationY -= mouse.Delta.X * sensitivity;
         camera.RotationX -= mouse.Delta.Y * sensitivity;
