@@ -1,9 +1,9 @@
-﻿using OpenTK.Graphics.OpenGL4;
+﻿using Engine;
+using OpenTK.Graphics.OpenGL4;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using System.Numerics;
-using Engine;
 
 namespace VoxelGameOpenTK;
 
@@ -15,6 +15,8 @@ internal class Window(GameWindowSettings gameWindowSettings, NativeWindowSetting
     private Shader shader;
     private Matrix4x4 projectionMatrix;
     private Camera camera;
+    private Map map;
+    private Mesh mapMesh;
 
     private float time = 0;
 
@@ -60,6 +62,29 @@ internal class Window(GameWindowSettings gameWindowSettings, NativeWindowSetting
         {
             Position = new(0, 0, 2)
         };
+
+        map = new Map
+        {
+            Voxels = new bool[,,] {
+                {
+                    { true, false, true },
+                    { false, false, false },
+                    { false, true, false },
+                },
+                {
+                    { false, false, true },
+                    { false, false, false },
+                    { true, true, true},
+                },
+                {
+                    { true, false, false },
+                    { true, false, false },
+                    { true, true, true},
+                },
+            }
+        };
+
+        mapMesh = map.GenerateMesh();
 
         shader = new Shader(ReadResource("shaders.default.vert"), ReadResource("shaders.default.frag"));
 
@@ -135,9 +160,7 @@ internal class Window(GameWindowSettings gameWindowSettings, NativeWindowSetting
         UpdateView();
 
         shader.Use();
-        cubeMesh.Draw(Matrix4x4.CreateRotationZ(time) * Matrix4x4.CreateRotationY(time / 2));
-        cubeMesh.Draw(Matrix4x4.CreateTranslation(1, 0, 0));
-        cubeMesh.Draw(Matrix4x4.CreateTranslation(-1, 0, 0));
+        mapMesh.Draw();
 
         SwapBuffers();
     }
