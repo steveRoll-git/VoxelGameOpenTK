@@ -3,7 +3,7 @@ using System.Numerics;
 
 namespace Engine;
 
-public class Mesh
+public class Mesh : IDisposable
 {
     private readonly int vao;
     private readonly int vbo;
@@ -60,5 +60,12 @@ public class Mesh
         GL.BindVertexArray(vao);
         Shader.CurrentShader?.SendMat4("transform", transform);
         GL.DrawElements(PrimitiveType.Triangles, vertexCount, DrawElementsType.UnsignedInt, 0);
+    }
+
+    public void Dispose()
+    {
+        GL.DeleteBuffer(vbo);
+        GL.DeleteBuffer(ebo);
+        GL.DeleteVertexArray(vao);
     }
 }

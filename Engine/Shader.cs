@@ -4,7 +4,7 @@ using OpenTK.Graphics.OpenGL4;
 
 namespace Engine;
 
-public class Shader
+public class Shader : IDisposable
 {
     private readonly int programHandle;
 
@@ -81,5 +81,10 @@ public class Shader
         sb.AppendLine("#line 1");
         sb.Append(code.Replace(VERSION_DIRECTIVE, ""));
         return sb.ToString();
+    }
+
+    public void Dispose()
+    {
+        GL.DeleteProgram(programHandle);
     }
 }

@@ -164,4 +164,13 @@ internal class Window(GameWindowSettings gameWindowSettings, NativeWindowSetting
 
         SwapBuffers();
     }
+
+    public override void Dispose()
+    {
+        base.Dispose();
+
+        shader.Dispose();
+        mapMesh.Dispose();
+        cubeMesh.Dispose();
+    }
 }
